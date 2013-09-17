@@ -1468,13 +1468,17 @@ if (require !== 'undefined') {
 
 var PageTransitions = function (mainEl, loaderEl) {
 
+	var $window = $(window);
+
 	(mainEl instanceof $) || (mainEl = (mainEl.length) ? $(mainEl) : $('main'));
 
 	return {
 		FixHeight: FixHeight(mainEl),
 		Loader: {
 			start: function(ctx, next) {
-				ctx.Loader = new Loader(loaderEl);
+				ctx.Loader = new Loader(loaderEl, {
+					$window: $window
+				});
 				_.isFunction(next) && next();
 			},
 			end: function(ctx, next) {
@@ -1509,6 +1513,7 @@ var Loader = function (domEl, opts) {
 	this.domEl = domEl;
 	this.activeClass = opts.activeClass || 'loader-active';
 	this.timeToTrigger = opts.timeToTrigger || 500;
+	this.$window =  opts.$window || $(window);
 
 	// trigger timer
 	this.killCounter = 0;
@@ -1523,10 +1528,16 @@ Loader.prototype.addLoader = function () {
 Loader.prototype.killLoader = function () {
 	window.clearTimeout(this.timeoutId);
 	this.domEl.hasClass(this.activeClass) && this.domEl.removeClass(this.activeClass);
+	this.domEl.css({});
 	this.killCounter += 1;
 };
 
 Loader.prototype.loaderDom = function () {
+	var viewportTop = this.$window.scrollTop();
+	this.domEl.css({
+		top: viewportTop,
+		bottom: viewportTop + this.$window.height()
+	});
 	this.domEl.addClass(this.activeClass);
 };
 
