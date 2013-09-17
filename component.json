@@ -1,8 +1,8 @@
 {
   "name": "page-transitions",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
-  "description": "Page Transition Functions for Single Page Apps",
+  "description": "Page transition helper functions for single page apps",
   "keywords": [
     "transitions",
     "singe page app"
@@ -19,5 +19,10 @@
     "lib/first-pageload.js"
   ],
   "demo": "",
-  "styles": []
+  "images": [
+    "loader.gif"
+  ],
+  "styles": [
+    "css/loader.css"
+  ]
 }

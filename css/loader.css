@@ -1,0 +1,14 @@
+.loader {
+	background: url('/img/page-transitions/loader.gif') 50% 50% no-repeat;
+}
+
+main {
+	position:relative;
+}
+
+.loader-active {
+	position:absolute;
+	top:0;
+	bottom:0;
+	width:100%;
+}

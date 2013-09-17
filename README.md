@@ -2,7 +2,6 @@
 
 Page Transition Functions
 
-[![Build Status](https://secure.travis-ci.org/techjacker/page-transitions.png)](http://travis-ci.org/techjacker/page-transitions)
 
 ### Install
 
@@ -26,18 +25,9 @@ bower install page-transitions
 ## Usage
 
 ```JavaScript
-var page-transitions = require('page-transitions'),
-	randomFn = function () {};
-
-page-transitions('blah'); // false
-page-transitions(randomFn); // true
+var page-transitions = require('page-transitions');
 ```
 
-
-### Docs
-[Yuidocs documentation here](docs/index.html)
-- fire up the connect server ```$ grunt docs```
-- navigate your browser to the [docs](http://localhost:9001)
 
 
 ## License
