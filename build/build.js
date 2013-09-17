@@ -1,4 +1,3 @@
-;(function(){
 
 /**
  * Require the given path.
@@ -1460,7 +1459,7 @@ require.register("techjacker-underscore/underscore.js", function(exports, requir
 require.register("page-transitions/lib/main.js", function(exports, require, module){
 if (require !== 'undefined') {
 	var _ = require('underscore');
-	var Loader = require('./loader.js');
+	var Loader = require('Loader');
 	var FixHeight = require('./fix-height.js');
 	var FirstLoad = require('./first-pageload.js');
 }
@@ -1470,96 +1469,18 @@ var PageTransitions = function (mainEl) {
 
 	(mainEl instanceof $) || (mainEl = (mainEl.length) ? $(mainEl) : $('main'));
 
-	return {
-		FixHeight: FixHeight(mainEl),
+	return _.extend(FixHeight(mainEl), {
 		Loader: Loader,
 		FirstLoad: FirstLoad
-	};
+	});
 };
 
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = PageTransitions;
 }
 });
-require.register("page-transitions/lib/loader.js", function(exports, require, module){
-if (require !== 'undefined') {
-	var _ = require('underscore');
-}
-
-var Loader = function (domEl) {
-	if (!(this instanceof Loader)) {
-		return new Loader(domEl);
-	}
-	this.domEl = domEl;
-	Loader.addLoader();
-	return this;
-};
-
-Loader.prototype.addLoader = function () {
-	this.timeoutId = window.setTimeout(this.loaderDom, 50);
-};
-
-Loader.prototype.killLoader = function () {
-	window.clearTimeout(this.timeoutId);
-	// this = null;
-};
-
-Loader.prototype.loaderDom = function () {
-	console.log("this.timeoutId", this.timeoutId);
-};
-
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = Loader;
-}
-});
-require.register("page-transitions/lib/fix-height.js", function(exports, require, module){
-if (require !== 'undefined') {
-	var FirstLoad = require('./first-pageload.js');
-}
-
-
-var FixHeight = function (mainEl) {
-
-	return {
-		before: function (ctx, next) {
-			mainEl.height($(window).height());
-			window.setTimeout(next, 50);
-		},
-		after: function (ctx, next) {
-			mainEl.height('');
-			next && window.setTimeout(next, 50);
-			FirstLoad.showFooter();
-		}
-	};
-};
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FixHeight;
-}
-});
-require.register("page-transitions/lib/first-pageload.js", function(exports, require, module){
-if (require !== 'undefined') {
-	var _ = require('underscore');
-}
-
-// initial Page Load
-var FirstLoad = {
-	showFooter: _.once(function () { $('footer').removeClass('invisible'); })
-};
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FirstLoad;
-}
-});
 require.alias("techjacker-underscore/underscore.js", "page-transitions/deps/underscore/underscore.js");
 require.alias("techjacker-underscore/underscore.js", "page-transitions/deps/underscore/index.js");
 require.alias("techjacker-underscore/underscore.js", "underscore/index.js");
 require.alias("techjacker-underscore/underscore.js", "techjacker-underscore/index.js");
-require.alias("page-transitions/lib/main.js", "page-transitions/index.js");if (typeof exports == "object") {
-  module.exports = require("page-transitions");
-} else if (typeof define == "function" && define.amd) {
-  define(function(){ return require("page-transitions"); });
-} else {
-  this["page-transitions"] = require("page-transitions");
-}})();
+require.alias("page-transitions/lib/main.js", "page-transitions/index.js");

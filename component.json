@@ -1,6 +1,6 @@
 {
   "name": "page-transitions",
-  "version": "0.0.6",
+  "version": "0.0.1",
   "license": "MIT",
   "description": "Page Transition Functions for Single Page Apps",
   "keywords": [
@@ -13,7 +13,10 @@
   },
   "main": "lib/main.js",
   "scripts": [
-    "lib/main.js"
+    "lib/main.js",
+    "lib/loader.js",
+    "lib/fix-height.js",
+    "lib/first-pageload.js"
   ],
   "demo": "",
   "styles": []

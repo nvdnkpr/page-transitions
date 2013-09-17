@@ -1,6 +1,6 @@
 {
   "name": "page-transitions",
-  "version": "0.0.6",
+  "version": "0.0.1",
   "description": "Is it a function?",
   "main": "build/page-transitions.js",
   "licenses": [{"type": "MIT"}],
