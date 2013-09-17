@@ -1,6 +1,6 @@
 # page-transitions
 
-Is it a function?
+Page Transition Functions
 
 [![Build Status](https://secure.travis-ci.org/techjacker/page-transitions.png)](http://travis-ci.org/techjacker/page-transitions)
 
@@ -39,24 +39,6 @@ page-transitions(randomFn); // true
 - fire up the connect server ```$ grunt docs```
 - navigate your browser to the [docs](http://localhost:9001)
 
-### API
-   - [page-transitions](#page-transitions)
-<a name=""></a>
- 
-<a name="page-transitions"></a>
-### page-transitions
-should return true if a function.
-
-```js
-var randomFn = function (argument) {},
-			randomObj = {},
-			randomStr = 'blah';
-
-expect(page-transitions(randomFn)).to.be.ok();
-		expect(page-transitions(randomObj)).to.not.be.ok();
-		expect(page-transitions(randomStr)).to.not.be.ok();
-done();
-```
 
 ## License
 Copyright (c) 2013 Andrew Griffiths <mail@andrewgriffithsonline.com>

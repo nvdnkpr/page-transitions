@@ -4,21 +4,21 @@ if (typeof require !== 'undefined') {
 }
 
 
-describe('page-transitions', function () {
+// describe('page-transitions', function () {
 
-	it('should return true if a function', function (done) {
+// 	it('should return true if a function', function (done) {
 
-		var randomFn = function (argument) {},
-			randomObj = {},
-			randomStr = 'blah';
+// 		var randomFn = function (argument) {},
+// 			randomObj = {},
+// 			randomStr = 'blah';
 
 
-		expect(page-transitions(randomFn)).to.be.ok();
-		expect(page-transitions(randomObj)).to.not.be.ok();
-		expect(page-transitions(randomStr)).to.not.be.ok();
+// 		expect(page-transitions(randomFn)).to.be.ok();
+// 		expect(page-transitions(randomObj)).to.not.be.ok();
+// 		expect(page-transitions(randomStr)).to.not.be.ok();
 
-		done();
+// 		done();
 
-	});
+// 	});
 
-});
+// });

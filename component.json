@@ -2,15 +2,14 @@
   "name": "page-transitions",
   "version": "0.0.6",
   "license": "MIT",
-  "description": "Is it a function?",
+  "description": "Page Transition Functions for Single Page Apps",
   "keywords": [
-    "function"
+    "transitions",
+    "singe page app"
   ],
   "repo": "techjacker/page-transitions",
-  "dependencies": {},
-  "development": {
-    "visionmedia/mocha": "*",
-    "techjacker/expect.js": "*"
+  "dependencies": {
+    "techjacker/underscore": "*"
   },
   "main": "lib/main.js",
   "scripts": [
