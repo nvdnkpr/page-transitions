@@ -1,0 +1,20 @@
+{
+  "name": "page-transitions",
+  "version": "0.0.6",
+  "description": "Is it a function?",
+  "main": "build/page-transitions.js",
+  "licenses": [{"type": "MIT"}],
+  "author": {
+    "name": "Andrew Griffiths",
+    "email": "mail@andrewgriffithsonline.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:techjacker/page-transitions.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "visionmedia/mocha": "*",
+    "techjacker/expect.js": "*"
+  }
+}
