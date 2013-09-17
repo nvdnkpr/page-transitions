@@ -1462,16 +1462,17 @@ if (require !== 'undefined') {
 	var _ = require('underscore');
 	var Loader = require('./loader.js');
 	var FixHeight = require('./fix-height.js');
-	var FirstLoad = require('./first-pageload.js');
+	// var FirstLoad = require('./first-pageload.js');
 }
 
 
-var PageTransitions = function (mainEl, loaderEl) {
+var PageTransitions = function (mainEl, loaderEl, footerEl) {
 
 	(mainEl instanceof $) || (mainEl = (mainEl.length) ? $(mainEl) : $('main'));
+	(footerEl instanceof $) || (footerEl = $('footer'));
 
 	return {
-		FixHeight: FixHeight(mainEl),
+		FixHeight: FixHeight(mainEl, footerEl),
 		Loader: {
 			start: function(ctx, next) {
 				ctx.Loader = new Loader(loaderEl);
@@ -1484,8 +1485,7 @@ var PageTransitions = function (mainEl, loaderEl) {
 				}
 				_.isFunction(next) && next();
 			}
-		},
-		FirstLoad: FirstLoad
+		}
 	};
 };
 
@@ -1509,6 +1509,7 @@ var Loader = function (domEl, opts) {
 	this.domEl = domEl;
 	this.activeClass = opts.activeClass || 'loader-active';
 	this.timeToTrigger = opts.timeToTrigger || 300;
+	this.$body = opts.$body || $('body');
 
 	// trigger timer
 	this.killCounter = 0;
@@ -1522,12 +1523,12 @@ Loader.prototype.addLoader = function () {
 
 Loader.prototype.killLoader = function () {
 	window.clearTimeout(this.timeoutId);
-	this.domEl.hasClass(this.activeClass) && this.domEl.removeClass(this.activeClass);
+	this.$body.hasClass(this.activeClass) && this.$body.removeClass(this.activeClass);
 	this.killCounter += 1;
 };
 
 Loader.prototype.loaderDom = function () {
-	this.domEl.addClass(this.activeClass);
+	this.$body.addClass(this.activeClass);
 };
 
 
@@ -1537,41 +1538,29 @@ if (typeof module !== 'undefined' && module.exports) {
 });
 require.register("page-transitions/lib/fix-height.js", function(exports, require, module){
 if (require !== 'undefined') {
-	var FirstLoad = require('./first-pageload.js');
+	// var FirstLoad = require('./first-pageload.js');
 }
 
 
-var FixHeight = function (mainEl) {
+var FixHeight = function (mainEl, footerEl) {
 
 	return {
 		before: function (ctx, next) {
 			mainEl.height($(window).height());
+			footerEl.addClass('invisible');
 			window.setTimeout(next, 50);
 		},
 		after: function (ctx, next) {
 			mainEl.height('');
 			next && window.setTimeout(next, 50);
-			FirstLoad.showFooter();
+			footerEl.removeClass('invisible');
+			// FirstLoad.showFooter();
 		}
 	};
 };
 
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = FixHeight;
-}
-});
-require.register("page-transitions/lib/first-pageload.js", function(exports, require, module){
-if (require !== 'undefined') {
-	var _ = require('underscore');
-}
-
-// initial Page Load
-var FirstLoad = {
-	showFooter: _.once(function () { $('footer').removeClass('invisible'); })
-};
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FirstLoad;
 }
 });
 require.alias("techjacker-underscore/underscore.js", "page-transitions/deps/underscore/underscore.js");
