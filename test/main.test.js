@@ -1,5 +1,5 @@
 if (typeof require !== 'undefined') {
-	var page-transitions = require('../lib/main.js');
+	var pageTransitions = require('../lib/main.js');
 	var expect = require('expect.js');
 }
 

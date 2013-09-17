@@ -17,7 +17,7 @@ COMPONENTJS_CMD = @component build --out $(@D) --name $(basename $(@F))
 ######################################
 # Release
 ######################################
-publish: clean build docs test-node lint
+publish: clean build docs lint
 
 docs: build
 	@grunt build
@@ -38,9 +38,6 @@ test-node: npm-install-dev
 		--timeout 2000 \
 		$(TEST_FILES)
 
-test-saucelabs: npm-install-dev components
-	@grunt test
-
 server test-browser: npm-install-dev components
 	@serve
 	@echo go to http://localhost:3000/test
@@ -51,7 +48,7 @@ npm-install-dev: package.json
 ######################################
 # Build
 ######################################
-build: components npm-install-dev $(BUILD_STANDALONE_MIN)
+build: components $(BUILD_STANDALONE_MIN)
 
 $(BUILD_STANDALONE_MIN): $(BUILD_STANDALONE)
 	@./node_modules/.bin/uglifyjs < $^ > $@
@@ -71,13 +68,13 @@ readme: readme-footer
 
 readme-footer:
 	@[ -d $(TMPL_DIR) ] || mkdir $(TMPL_DIR)
-	@make test-node REPORTER=markdown \
-		| tail -n +2 \
-		| head -n -2 \
-		| sed 's/\# /\#\#\# /g' \
-		| sed 's/TOC/API/g' \
-		| sed 's/^page-transitions\./#\#\#\#\# page-transitions\./g' \
-		| cat > $(TMPL_DIR)/$(MOCHA_MD_DOCS)
+	# @make test-node REPORTER=markdown \
+	# 	| tail -n +2 \
+	# 	| head -n -2 \
+	# 	| sed 's/\# /\#\#\# /g' \
+	# 	| sed 's/TOC/API/g' \
+	# 	| sed 's/^page-transitions\./#\#\#\#\# page-transitions\./g' \
+	# 	| cat > $(TMPL_DIR)/$(MOCHA_MD_DOCS)
 	@echo '' >> $(TMPL_DIR)/$(MOCHA_MD_DOCS)
 	@echo '## License' >> $(TMPL_DIR)/$(MOCHA_MD_DOCS)
 
