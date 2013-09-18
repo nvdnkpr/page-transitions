@@ -1528,7 +1528,7 @@ Loader.prototype.killLoader = function () {
 };
 
 Loader.prototype.loaderDom = function () {
-	this.$body.addClass(this.activeClass);
+	this.$body.hasClass(this.activeClass) || this.$body.addClass(this.activeClass);
 };
 
 
